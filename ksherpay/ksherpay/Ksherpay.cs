@@ -157,7 +157,7 @@ namespace ksherpay
                     
                 }
             }
-            Console.WriteLine("data for making signanuture: {0}", query.ToString());
+            //Console.WriteLine("data for making signanuture: {0}", query.ToString());
 
             // next : sign the string
             byte[] bytes = null;
