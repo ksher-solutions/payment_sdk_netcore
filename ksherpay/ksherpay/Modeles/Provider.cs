@@ -1,4 +1,4 @@
-﻿namespace ksherpay
+﻿namespace Ksherpay
 {
     public enum Provider
     {

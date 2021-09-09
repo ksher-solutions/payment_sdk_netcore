@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ksherpay
+namespace Ksherpay
 {
     public static class ApiType
     {

@@ -5,43 +5,42 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ksherpay
+namespace Ksherpay
 {
-    class Ksherpay
+    public class Ksherpay
     {
-        private string base_url;
-        private string apiType;
-        private string token;
-        private Provider provider;
-        private string mid;
-        private string endpoint;
+        public static string Base_url;
+        public static string ApiType;
+        public static string Token;
+        public static Provider Provider;
+        public string Mid;
+        public static string Endpoint;
 
-        public Ksherpay(string base_url, string apiType, string token, Provider? provider=Provider.Ksher, string? mid=null, int? timeout= 10)
+        public Ksherpay(string base_url, string apiType, string token, Provider? provider = Provider.Ksher, int? timeout = 10)
         {
-            this.base_url = base_url;
-            this.apiType = apiType;
-            this.token = token;
-            this.provider = (Provider)provider;
-            this.mid = mid;
+            Base_url = base_url;
+            ApiType = apiType;
+            Token = token;
+            Provider = (Provider)provider;
 
-            if (apiType == ApiType.redirect)
+            if (apiType == global::Ksherpay.ApiType.redirect)
             {
-                endpoint = "/api/v1/redirect/orders";
+                Endpoint = "/api/v1/redirect/orders";
             }
-            else if (apiType == ApiType.cscanb)
+            else if (apiType == global::Ksherpay.ApiType.cscanb)
             {
-                endpoint = "/api/v1/cscanb/orders";
+                Endpoint = "/api/v1/cscanb/orders";
             }
             else
             {
-                endpoint = "/api/v1";
+                Endpoint = "/api/v1";
             }
         }
-        public IDictionary<string, string> create(IDictionary<string,string> parameters)
+        public IDictionary<string, string> create(IDictionary<string, string> parameters)
         {
             parameters.Add("timestamp", MyUtil.GenerateTimestamp());
-            parameters.Add("signature", SignRequest(parameters, endpoint));
-            return request("POST", endpoint,parameters);
+            parameters.Add("signature", SignRequest(parameters, Endpoint));
+            return request("POST", Endpoint, parameters);
         }
         public IDictionary<string, string> query(IDictionary<string, string> parameters)
         {
@@ -49,8 +48,8 @@ namespace ksherpay
             parameters.Remove("order_id");
 
             parameters.Add("timestamp", MyUtil.GenerateTimestamp());
-            parameters.Add("signature", SignRequest(parameters, endpoint+"/"+ order_id));
-            return request("GET", endpoint + "/" + order_id, parameters);
+            parameters.Add("signature", SignRequest(parameters, Endpoint+"/"+ order_id));
+            return request("GET", Endpoint + "/" + order_id, parameters);
         }
 
         public IDictionary<string, string> refund(IDictionary<string, string> parameters)
@@ -59,8 +58,8 @@ namespace ksherpay
             parameters.Remove("order_id");
 
             parameters.Add("timestamp", MyUtil.GenerateTimestamp());
-            parameters.Add("signature", SignRequest(parameters, endpoint + "/" + order_id));
-            return request("PUT", endpoint + "/" + order_id, parameters);
+            parameters.Add("signature", SignRequest(parameters, Endpoint + "/" + order_id));
+            return request("PUT", Endpoint + "/" + order_id, parameters);
         }
         public IDictionary<string, string> cancle(IDictionary<string, string> parameters)
         {
@@ -68,17 +67,17 @@ namespace ksherpay
             parameters.Remove("order_id");
 
             parameters.Add("timestamp", MyUtil.GenerateTimestamp());
-            parameters.Add("signature", SignRequest(parameters, endpoint + "/" + order_id));
-            return request("DELETE", endpoint + "/" + order_id, parameters);
+            parameters.Add("signature", SignRequest(parameters, Endpoint + "/" + order_id));
+            return request("DELETE", Endpoint + "/" + order_id, parameters);
         }
 
-        private IDictionary<string, string> request(string method, string endpoint, IDictionary<string, string> parameters)
+        private static IDictionary<string, string> request(string method, string endpoint, IDictionary<string, string> parameters)
         {
             //Console.WriteLine("request:");
             //MyUtil.logDictionary(parameters);
             //Console.WriteLine("=============");
 
-            var request = Task.Run(() => MyUtil.HttpContent(method, base_url + endpoint, parameters));
+            var request = Task.Run(() => MyUtil.HttpContent(method, Base_url + endpoint, parameters));
             request.Wait();
 
             try
@@ -118,7 +117,7 @@ namespace ksherpay
             }
         }
         
-        public bool checkSignature(IDictionary<string, string> parameters, string endpoint)
+        public static bool checkSignature(IDictionary<string, string> parameters, string endpoint)
         {
             string ori_signature=parameters["signature"];
             parameters.Remove("signature");
@@ -130,7 +129,7 @@ namespace ksherpay
             else
                 return false;
         }
-        public string SignRequest(IDictionary<string, string> parameters, string endpoint)
+        public static string SignRequest(IDictionary<string, string> parameters, string endpoint)
         {
             // first : sort all key with asci order
             IDictionary<string, string> sortedParams = new SortedDictionary<string, string>(parameters, StringComparer.Ordinal);
@@ -162,7 +161,7 @@ namespace ksherpay
             // next : sign the string
             byte[] bytes = null;
 
-                HMACSHA256 sha256 = new HMACSHA256(Encoding.UTF8.GetBytes(this.token));
+                HMACSHA256 sha256 = new HMACSHA256(Encoding.UTF8.GetBytes(Token));
                 bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(query.ToString()));
 
             // finally : transfer binary byte to hex string

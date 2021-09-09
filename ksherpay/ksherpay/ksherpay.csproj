@@ -1,12 +1,43 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+    <Company>Ksher</Company>
+    <Authors>Ksher &lt;solutions@ksher.com&gt;</Authors>
+    <Product>Ksher</Product>
+    <PackageId>Ksher</PackageId>
+    <Description>Ksher</Description>
+    <PackageProjectUrl>https://github.com/ksher-solutions/payment_sdk_netcore</PackageProjectUrl>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>ksher_icon.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/ksher-solutions/payment_sdk_netcore</RepositoryUrl>
+    <PackageReleaseNotes />
+    <PackageTags>payment, gateway, ksher</PackageTags>
+    <Version>1.0.0.1</Version>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="ksher_icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
