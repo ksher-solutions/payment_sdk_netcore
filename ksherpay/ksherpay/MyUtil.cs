@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ksherpay
+namespace Ksherpay
 {
     public class MyUtil
 	{

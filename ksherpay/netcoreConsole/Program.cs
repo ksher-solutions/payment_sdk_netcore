@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-
-namespace ksherpay
+using Ksherpay;
+namespace netcoreConsole
 {
     class Program
     {
 
         static string base_url = @"https://sandboxdoc.vip.ksher.net";
         static string token = "your token";
+        
         static void Main(string[] args)
         {
-            Ksherpay ksherpay_redirect = new Ksherpay(base_url, ApiType.redirect, token);
-            Ksherpay ksherpay_cscanb = new Ksherpay(base_url, ApiType.cscanb, token);
+
+            Ksherpay.Ksherpay ksherpay_redirect = new Ksherpay.Ksherpay(base_url, ApiType.redirect, token);
+            Ksherpay.Ksherpay ksherpay_cscanb = new Ksherpay.Ksherpay(base_url, ApiType.cscanb, token);
             string cmd = "";
 
-            while (cmd!="9")
+            while (cmd != "9")
             {
                 Console.WriteLine("--- redirect API ---");
                 Console.WriteLine("1 - create order");
@@ -63,7 +65,7 @@ namespace ksherpay
                     var response_query = ksherpay_redirect.refund(refundRequest);
                     logDictionary(response_query);
                 }
-                else if(cmd == "5")
+                else if (cmd == "5")
                 {
                     IDictionary<string, string> createRequest = new Dictionary<string, string>();
                     createRequest.Add("merchant_order_id", "test_hello2");
