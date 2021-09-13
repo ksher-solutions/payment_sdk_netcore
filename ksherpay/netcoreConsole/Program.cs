@@ -37,10 +37,16 @@ namespace netcoreConsole
                 if (cmd == "1")
                 {
                     IDictionary<string, string> createRequest = new Dictionary<string, string>();
-                    createRequest.Add("merchant_order_id", "hello");
-                    createRequest.Add("amount", "100");
+                    string merchant_order_id=Ksherpay.MyUtil.GenerateTimestamp();
+
+                    Console.WriteLine("Enter amount (int only, Enter 150 is 1.50): ");
+                    string amount = Console.ReadLine();
+
+                    createRequest.Add("merchant_order_id", merchant_order_id);
+                    createRequest.Add("amount", amount);
                     createRequest.Add("redirect_url", @"https://webhook.site/effdbb5f-0c80-4efe-b7e8-c9f9585461d8/pass");
                     createRequest.Add("redirect_url_fail", @"https://webhook.site/effdbb5f-0c80-4efe-b7e8-c9f9585461d8/fail");
+                    //createRequest.Add("channel", "ktbcard"); if not add will display all of wallet
                     createRequest.Add("note", "test order");
 
                     var response_create = ksherpay_redirect.create(createRequest);
@@ -49,28 +55,49 @@ namespace netcoreConsole
 
                 else if (cmd == "2")
                 {
+                    Console.WriteLine("Enter merchant_order_id: ");
+                    string merchant_order_id = Console.ReadLine();
+
                     IDictionary<string, string> queryRequest = new Dictionary<string, string>();
-                    queryRequest.Add("order_id", "hello");
+                    queryRequest.Add("order_id", merchant_order_id);
 
                     var response_query = ksherpay_redirect.query(queryRequest);
                     logDictionary(response_query);
                 }
                 else if (cmd == "3")
                 {
+                    Console.WriteLine("Enter merchant_order_id: ");
+                    string merchant_order_id = Console.ReadLine();
+
+                    Console.WriteLine("Enter amount (int only, Enter 150 is 1.50): ");
+                    string amount = Console.ReadLine();
+
+                    string refund_order_id = Ksherpay.MyUtil.GenerateTimestamp();
+
                     IDictionary<string, string> refundRequest = new Dictionary<string, string>();
-                    refundRequest.Add("order_id", "hello");
-                    refundRequest.Add("refund_order_id", "refund_hello");
-                    refundRequest.Add("refund_amount", "100");
+                    refundRequest.Add("order_id", merchant_order_id);
+                    refundRequest.Add("refund_order_id", refund_order_id);
+                    refundRequest.Add("refund_amount", amount);
 
                     var response_query = ksherpay_redirect.refund(refundRequest);
                     logDictionary(response_query);
                 }
                 else if (cmd == "5")
                 {
+                    string merchant_order_id = Ksherpay.MyUtil.GenerateTimestamp();
+
+                    Console.WriteLine("Enter amount (int only, Enter 150 is 1.50): ");
+                    string amount = Console.ReadLine();
+
+                    Console.WriteLine("Enter channel (alipay,wechat,airpay,promptpay,truemoney) ");
+                    Console.WriteLine("(Please check mid type support for make sure account support)");
+                    string channel = Console.ReadLine();
+
+
                     IDictionary<string, string> createRequest = new Dictionary<string, string>();
-                    createRequest.Add("merchant_order_id", "test_hello2");
-                    createRequest.Add("amount", "100");
-                    createRequest.Add("channel", "truemoney");
+                    createRequest.Add("merchant_order_id", merchant_order_id);
+                    createRequest.Add("amount", amount);
+                    createRequest.Add("channel", channel);
                     createRequest.Add("note", "test order");
 
                     var response_create = ksherpay_cscanb.create(createRequest);
@@ -79,18 +106,29 @@ namespace netcoreConsole
 
                 else if (cmd == "6")
                 {
+                    Console.WriteLine("Enter merchant_order_id: ");
+                    string merchant_order_id = Console.ReadLine();
+
                     IDictionary<string, string> queryRequest = new Dictionary<string, string>();
-                    queryRequest.Add("order_id", "test_hello2");
+                    queryRequest.Add("order_id", merchant_order_id);
 
                     var response_query = ksherpay_redirect.query(queryRequest);
                     logDictionary(response_query);
                 }
                 else if (cmd == "7")
                 {
+                    Console.WriteLine("Enter merchant_order_id: ");
+                    string merchant_order_id = Console.ReadLine();
+
+                    Console.WriteLine("Enter amount (int only, Enter 150 is 1.50): ");
+                    string amount = Console.ReadLine();
+
+                    string refund_order_id = Ksherpay.MyUtil.GenerateTimestamp();
+
                     IDictionary<string, string> refundRequest = new Dictionary<string, string>();
-                    refundRequest.Add("order_id", "test_hello2");
-                    refundRequest.Add("refund_order_id", "refund_test_hello2");
-                    refundRequest.Add("refund_amount", "100");
+                    refundRequest.Add("order_id", merchant_order_id);
+                    refundRequest.Add("refund_order_id", refund_order_id);
+                    refundRequest.Add("refund_amount", amount);
 
                     var response_refund = ksherpay_redirect.refund(refundRequest);
                     logDictionary(response_refund);
