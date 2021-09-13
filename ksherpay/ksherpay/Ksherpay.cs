@@ -9,12 +9,12 @@ namespace Ksherpay
 {
     public class Ksherpay
     {
-        public static string Base_url;
-        public static string ApiType;
-        public static string Token;
-        public static Provider Provider;
+        public string Base_url;
+        public string ApiType;
+        public string Token;
+        public Provider Provider;
         public string Mid;
-        public static string Endpoint;
+        public string Endpoint;
 
         public Ksherpay(string base_url, string apiType, string token, Provider? provider = Provider.Ksher, int? timeout = 10)
         {
@@ -37,7 +37,7 @@ namespace Ksherpay
             }
         }
         public IDictionary<string, string> create(IDictionary<string, string> parameters)
-        {
+         {
             parameters.Add("timestamp", MyUtil.GenerateTimestamp());
             parameters.Add("signature", SignRequest(parameters, Endpoint));
             return request("POST", Endpoint, parameters);
@@ -71,7 +71,7 @@ namespace Ksherpay
             return request("DELETE", Endpoint + "/" + order_id, parameters);
         }
 
-        private static IDictionary<string, string> request(string method, string endpoint, IDictionary<string, string> parameters)
+        private IDictionary<string, string> request(string method, string endpoint, IDictionary<string, string> parameters)
         {
             //Console.WriteLine("request:");
             //MyUtil.logDictionary(parameters);
@@ -117,7 +117,7 @@ namespace Ksherpay
             }
         }
         
-        public static bool checkSignature(IDictionary<string, string> parameters, string endpoint)
+        public bool checkSignature(IDictionary<string, string> parameters, string endpoint)
         {
             string ori_signature=parameters["signature"];
             parameters.Remove("signature");
@@ -129,7 +129,7 @@ namespace Ksherpay
             else
                 return false;
         }
-        public static string SignRequest(IDictionary<string, string> parameters, string endpoint)
+        public string SignRequest(IDictionary<string, string> parameters, string endpoint)
         {
             // first : sort all key with asci order
             IDictionary<string, string> sortedParams = new SortedDictionary<string, string>(parameters, StringComparer.Ordinal);

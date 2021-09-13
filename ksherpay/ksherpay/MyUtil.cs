@@ -11,14 +11,14 @@ namespace Ksherpay
 {
     public class MyUtil
 	{
-        public static async Task<string> HttpContent(string methord, string url, object payloadObj)
+        internal static async Task<string> HttpContent(string method, string url, object payloadObj)
         {
             var payload = JsonConvert.SerializeObject(payloadObj);
 
             HttpClient httpClient = new HttpClient();
             HttpContent httpContent = new StringContent(payload, Encoding.UTF8, "application/json");
 
-            HttpMethod httpmethord = new HttpMethod(methord);
+            HttpMethod httpmethord = new HttpMethod(method);
             HttpRequestMessage request = new HttpRequestMessage(httpmethord, url);
             request.Content = httpContent;
 
