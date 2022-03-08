@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFrameworks>netcoreapp2.1;net46</TargetFrameworks>
     <ApplicationIcon />
     <StartupObject />
     <Company>Ksher</Company>
@@ -20,13 +20,17 @@
     <RepositoryUrl>https://github.com/ksher-solutions/payment_sdk_netcore</RepositoryUrl>
     <PackageReleaseNotes />
     <PackageTags>payment, gateway, ksher</PackageTags>
-    <Version>1.0.1</Version>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" />
+    <PackageReference Include="System.Net.Http.WinHttpHandler" />
   </ItemGroup>
 
   <ItemGroup>

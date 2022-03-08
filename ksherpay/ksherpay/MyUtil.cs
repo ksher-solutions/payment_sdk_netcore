@@ -22,7 +22,24 @@ namespace Ksherpay
             HttpRequestMessage request = new HttpRequestMessage(httpmethord, url);
             request.Content = httpContent;
 
-            var httpResponse = await httpClient.SendAsync(request);
+            HttpResponseMessage httpResponse;
+
+#if NET46
+            if (method == "GET")
+            {
+                var handler = new WinHttpHandler();
+                var client = new HttpClient(handler);
+
+                httpResponse = await client.SendAsync(request);
+            
+            }
+            else
+            {
+                httpResponse = await httpClient.SendAsync(request);
+            }
+#else
+            httpResponse = await httpClient.SendAsync(request);
+#endif
 
 
             if (httpResponse.Content != null)
