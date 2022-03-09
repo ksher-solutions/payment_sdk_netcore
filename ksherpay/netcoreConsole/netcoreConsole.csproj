@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ksher" Version="1.0.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ksherpay\Ksherpay.csproj" />
   </ItemGroup>
 

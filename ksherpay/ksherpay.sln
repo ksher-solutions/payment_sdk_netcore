@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ksherpay", "ksherpay\Ksherpay.csproj", "{7A164EEF-29D8-492F-8BC9-B91603A42EB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netcoreConsole", "netcoreConsole\netcoreConsole.csproj", "{ED1F5EE6-4EEB-4EB4-B30A-5FD536BEC950}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "netcoreConsole", "netcoreConsole\netcoreConsole.csproj", "{ED1F5EE6-4EEB-4EB4-B30A-5FD536BEC950}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netframeworkConsole", "netframeworkConsole\netframeworkConsole.csproj", "{36DD212C-F2D1-4657-9349-9A124BE7E215}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{ED1F5EE6-4EEB-4EB4-B30A-5FD536BEC950}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED1F5EE6-4EEB-4EB4-B30A-5FD536BEC950}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED1F5EE6-4EEB-4EB4-B30A-5FD536BEC950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36DD212C-F2D1-4657-9349-9A124BE7E215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36DD212C-F2D1-4657-9349-9A124BE7E215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36DD212C-F2D1-4657-9349-9A124BE7E215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36DD212C-F2D1-4657-9349-9A124BE7E215}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
